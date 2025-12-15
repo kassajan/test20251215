@@ -1,6 +1,6 @@
 # syntax_error_example.py
 
-def greet(name)
+def greet(name):
     # コロン(:)が抜けている → SyntaxError
     print("Hello, " + name)
 
