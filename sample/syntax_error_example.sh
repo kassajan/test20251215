@@ -8,7 +8,8 @@ echo "Hello, world!"  # 正しくは echo
 echo "Value is $UNDEFINED_VAR"
 
 # 3. if 文の構文ミス
-if [ 1 -eq 1 ]; then
+a=20
+if [ $a -eq 1 ]; then
   echo "Numbers are equal"
 fi
 
