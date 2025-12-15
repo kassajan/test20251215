@@ -23,6 +23,9 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Install ruff
+        run: uv pip install ruff==0.1.0
+
       - name: Lint Python with Ruff
         # 文法エラー、未使用インポート、フォーマット等を一括チェック
         run: uv run ruff check .
