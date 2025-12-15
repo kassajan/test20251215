@@ -23,6 +23,9 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Set up Python virtual environment
+        run: uv venv
+
       - name: Install ruff
         run: uv pip install ruff==0.1.0
 
