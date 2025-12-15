@@ -13,9 +13,10 @@ if [ 1 -eq 1 ] ; then  # then がない → syntax error
 fi
 
 # 4. 閉じないクォート
-echo "This string is not closed
+echo "This string is not closed"
 
 # 5. 関数の定義ミス
 myfunc() {        # 関数は } で閉じる必要がある
   echo "Hello"
+}
 # 閉じてない
