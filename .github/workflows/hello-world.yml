@@ -1,0 +1,25 @@
+name: GitHub Actions Demo
+# comment
+#
+# 実行するタイミング（トリガー）の設定
+on:
+  push:                # コードがPushされた時
+  workflow_dispatch:   # ブラウザから手動で実行したい時（テストに便利！）
+
+jobs:
+  # 「say-hello」という名前のジョブを定義
+  say-hello:
+    runs-on: ubuntu-latest  # 無料枠を節約できるLinux環境を使用
+    
+    steps:
+      # ステップ1：メッセージを表示
+      - name: Run a one-line script
+        run: echo "こんにちは！GitHub Actionsが正常に動いています。"
+
+      # ステップ2：複数のコマンドを実行
+      - name: Run a multi-line script
+        run: |
+          echo "現在のサーバー時刻:"
+          date
+          echo "実行しているユーザー:"
+          whoami
