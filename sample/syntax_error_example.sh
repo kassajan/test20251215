@@ -2,7 +2,7 @@
 # syntax_error_example.sh
 
 # 1. コマンドのタイプミス → コマンドが存在しない
-eccho "Hello, world!"  # 正しくは echo
+echo "Hello, world!"  # 正しくは echo
 
 # 2. 未定義変数を使う（set -u を有効にするとエラーになる）
 echo "Value is $UNDEFINED_VAR"
