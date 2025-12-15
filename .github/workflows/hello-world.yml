@@ -23,3 +23,5 @@ jobs:
           date
           echo "実行しているユーザー:"
           whoami
+          echo "disk"
+          df
