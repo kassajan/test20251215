@@ -5,7 +5,7 @@ def greet(name):
     print("Hello, " + name)
 
 # 不正なインデント
-  print("This line is incorrectly indented")
+print("This line is incorrectly indented")
 
 # 不正な文字列
 text = "Hello world  # クオートが閉じていない → SyntaxError
