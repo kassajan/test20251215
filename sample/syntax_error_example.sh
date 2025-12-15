@@ -8,7 +8,7 @@ eccho "Hello, world!"  # 正しくは echo
 echo "Value is $UNDEFINED_VAR"
 
 # 3. if 文の構文ミス
-if [ 1 -eq 1 ]   # then がない → syntax error
+if [ 1 -eq 1 ] ; then  # then がない → syntax error
   echo "Numbers are equal"
 fi
 
