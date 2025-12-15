@@ -8,7 +8,7 @@ def greet(name):
 print("This line is incorrectly indented")
 
 # 不正な文字列
-text = "Hello world  # クオートが閉じていない → SyntaxError
+text = "Hello world"  # クオートが閉じていない → SyntaxError
 
 # 関数呼び出しの括弧ミス
 greet("Alice"
