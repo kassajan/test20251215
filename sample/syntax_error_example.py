@@ -11,4 +11,4 @@ print("This line is incorrectly indented")
 text = "Hello world"  # クオートが閉じていない → SyntaxError
 
 # 関数呼び出しの括弧ミス
-greet("Alice"
+greet("Alice")
