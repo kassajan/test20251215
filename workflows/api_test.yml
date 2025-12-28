@@ -1,0 +1,32 @@
+name: API Stub Test
+
+on:
+  workflow_dispatch:  # ← ブラウザから手動実行できる
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test-api:
+    runs-on: [self-hosted, wsl]  # ← self-hosted runner 名称を指定
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Test /health endpoint
+        run: |
+          echo "Testing /health"
+          curl -f http://localhost:8000/health
+
+      - name: Test /items/123 endpoint
+        run: |
+          echo "Testing /items/123"
+          curl -f http://localhost:8000/items/123
+
+      - name: Test /v1/completions endpoint
+        run: |
+          echo "Testing /v1/completions"
+          curl -f -X POST http://localhost:8000/v1/completions \
+            -H "Content-Type: application/json" \
+            -d '{"model":"stub-model","prompt":"Hello","max_tokens":10}'
