@@ -1,0 +1,46 @@
+name: API Stub Test2
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test-api2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install fastapi uvicorn pydantic
+
+      - name: Start API server in background
+        run: |
+	  cd sample
+          nohup uvicorn openaiserver_stab:app --host 0.0.0.0 --port 8000 &
+          sleep 3
+
+      - name: Test /health endpoint
+        run: |
+          echo "Testing /health"
+          curl -f http://localhost:8000/health
+
+      - name: Test /items/123 endpoint
+        run: |
+          echo "Testing /items/123"
+          curl -f http://localhost:8000/items/123
+
+      - name: Test /v1/completions endpoint
+        run: |
+          echo "Testing /v1/completions"
+          curl -f -X POST http://localhost:8000/v1/completions \
+            -H "Content-Type: application/json" \
+            -d '{"model":"stub-model","prompt":"Hello","max_tokens":10}'
