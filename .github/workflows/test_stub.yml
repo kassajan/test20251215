@@ -25,9 +25,45 @@ jobs:
           uvicorn stub_server:app --host 0.0.0.0 --port 8000 &
           sleep 3
 
-      - name: Call stub with curl
+      - name: Call stub with curl (OK)
         run: |
           curl -X POST http://localhost:8000/v1/chat/completions \
+            -H "Content-Type: application/json" \
+            -d '{
+              "model": "gpt-4o-mini",
+              "messages": [{"role": "user", "content": "Hello"}]
+            }'
+
+name: Test OpenAI Stub (FastAPI + uvicorn)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-stub:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install fastapi uvicorn[standard]
+
+      - name: Start stub server with uvicorn
+        run: |
+          uvicorn stub_server:app --host 0.0.0.0 --port 8000 &
+          sleep 3
+
+      - name: Call stub with curl (port mis)
+        run: |
+          curl -X POST http://localhost:8080/v1/chat/completions \
             -H "Content-Type: application/json" \
             -d '{
               "model": "gpt-4o-mini",
