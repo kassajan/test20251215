@@ -36,7 +36,7 @@ jobs:
 
       - name: Call stub with curl (NG port)
         run: |
-	  set -o pipefail	
+          set -o pipefail	
           curl --fail -X POST http://localhost:8080/v1/chat/completions \
             -H "Content-Type: application/json" \
             -d '{
