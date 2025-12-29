@@ -45,15 +45,27 @@ jobs:
 #            }' | jq .
 
 
-      - name: Call stub with curl (NG IP)
+#      - name: Call stub with curl (NG IP)
+#        run: |
+#          set -o pipefail	
+#          curl --fail \
+#            --connect-timeout 10 \
+#            -X POST http://192.168.0.5:8000/v1/chat/completions \
+#            -H "Content-Type: application/json" \
+#            -d '{
+#              "model": "gpt-4o-mini",
+#              "messages": [{"role": "user", "content": "Hello"}]
+#            }' | jq .
+
+      - name: Call stub with curl (bad request)
         run: |
           set -o pipefail	
           curl --fail \
             --connect-timeout 10 \
-            -X POST http://192.168.0.5:8000/v1/chat/completions \
+            -X POST http://localhost:8000/v1/chat/completions \
             -H "Content-Type: application/json" \
             -d '{
               "model": "gpt-4o-mini",
-              "messages": [{"role": "user", "content": "Hello"}]
+              "messages": [{"role": "user", "contents": "Hello"}]
             }' | jq .
 
