@@ -1,0 +1,33 @@
+# .github/workflows/ci-pr-target.yml
+name: Insecure CI for PR (DEMO: vulnerable)
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    # デフォルトの GITHUB_TOKEN 権限も強いまま (contents: write など)
+    steps:
+      - name: Checkout PR code (VULNERABLE)
+        uses: actions/checkout@v4
+        with:
+          # フォーク側のヘッドコミットをチェックアウトしてしまっている
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Install dependencies (VULNERABLE)
+        run: |
+          # ここで攻撃者が用意した package.json / script が実行されうる
+          npm ci
+
+      - name: Run tests (VULNERABLE)
+        env:
+          # リポジトリのシークレットが、そのまま PR 側コードの環境変数に渡ってしまう
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          # 例えば test スクリプト内で env を外部に送信するよう仕込まれていたらアウト
+          npm test
